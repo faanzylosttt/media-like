@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📁 CloudShare - File Hosting</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <h1>CloudShare</h1>
+            </div>
+            <div class="admin-toggle">
+                <button class="admin-btn" onclick="toggleAdminPanel()">
+                    <i class="fas fa-cog"></i> Admin Panel
+                </button>
+            </div>
+        </header>
+
+        <!-- Upload Section -->
+        <section class="upload-section">
+            <div class="section-header">
+                <i class="fas fa-upload"></i>
+                <h2>Upload File Baru</h2>
+            </div>
+            
+            <div class="upload-area" id="uploadArea">
+                <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                <p>Drag & drop file di sini atau <span class="browse-text">browse</span></p>
+                <input type="file" id="fileInput" hidden>
+            </div>
+            
+            <div class="upload-form">
+                <input type="text" id="fileName" placeholder="💡 Nama file (opsional)">
+                <button class="upload-btn" onclick="uploadFile()">
+                    <i class="fas fa-upload"></i> Upload
+                </button>
+            </div>
+            
+            <div id="uploadProgress" class="upload-progress" style="display: none;">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span id="progressText">0%</span>
+            </div>
+            
+            <div id="uploadStatus"></div>
+        </section>
+
+        <!-- Download Section -->
+        <section class="download-section">
+            <div class="section-header">
+                <i class="fas fa-download"></i>
+                <h2>File Tersedia</h2>
+                <div class="download-status" id="downloadStatus">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Download sedang aktif</span>
+                </div>
+            </div>
+            
+            <div id="fileList" class="file-grid">
+                <!-- Files akan dimuat di sini -->
+            </div>
+            
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <i class="fas fa-folder-open"></i>
+                <p>Belum ada file yang tersedia</p>
+            </div>
+        </section>
+
+        <!-- Admin Panel -->
+        <section id="adminPanel" class="admin-panel" style="display: none;">
+            <div class="section-header">
+                <i class="fas fa-shield-alt"></i>
+                <h2>Admin Control Panel</h2>
+            </div>
+            
+            <div class="admin-login" id="adminLogin">
+                <div class="login-form">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="adminPassword" placeholder="🔐 Password Admin">
+                    <button onclick="loginAdmin()">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </div>
+            </div>
+            
+            <div id="adminControls" class="admin-controls" style="display: none;">
+                <div class="control-card">
+                    <h3><i class="fas fa-toggle-on"></i> Global Download Control</h3>
+                    <div class="toggle-switch">
+                        <label class="switch">
+                            <input type="checkbox" id="downloadToggle" checked>
+                            <span class="slider"></span>
+                        </label>
+                        <span id="toggleStatus">Download Aktif</span>
+                    </div>
+                </div>
+                
+                <div class="control-card">
+                    <h3><i class="fas fa-list"></i> Manage Files</h3>
+                    <div id="adminFileList" class="admin-file-list">
+                        <!-- Admin file list -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal Konfirmasi -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h3>Konfirmasi</h3>
+            <p id="confirmMessage"></p>
+            <div class="modal-actions">
+                <button class="cancel-btn" onclick="closeModal()">Batal</button>
+                <button class="confirm-btn" onclick="confirmAction()">Ya, Lanjutkan</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
